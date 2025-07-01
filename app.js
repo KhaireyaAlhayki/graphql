@@ -39,4 +39,5 @@ function initApp() {
 }
 
 window.handleLogin = handleLogin;
+window.logout = logout;
 window.addEventListener("load", initApp);

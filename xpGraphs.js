@@ -60,26 +60,32 @@ export function drawXPLineGraph(transactions, containerId) {
   const tooltip = document.createElement("div");
   Object.assign(tooltip.style, {
     position: "absolute",
-    background: "#1f1f1f",
-    color: "#fff",
-    padding: "6px 10px",
-    borderRadius: "4px",
-    fontSize: "12px",
-    pointerEvents: "none",
+    background: "#f6f5ff",
+    color: "#4c1d95",
+    padding: "12px 18px",
+    borderRadius: "10px",
+    fontSize: "16px",
+    fontWeight: "600",
+    boxShadow: "0 8px 32px rgba(139,92,246,0.10)",
+    border: "2px solid #ede9fe",
     opacity: 0,
-    transition: "opacity 0.2s ease",
-    zIndex: 1000
+    pointerEvents: "none",
+    zIndex: 1000,
+    transition: "opacity 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1)",
+    transform: "scale(0.95)",
   });
   document.body.appendChild(tooltip);
 
   const showTooltip = (x, y, text) => {
     tooltip.textContent = text;
     tooltip.style.left = `${x + 10}px`;
-    tooltip.style.top = `${y - 30}px`;
+    tooltip.style.top = `${y - 40}px`;
     tooltip.style.opacity = 1;
+    tooltip.style.transform = "scale(1)";
   };
   const hideTooltip = () => {
     tooltip.style.opacity = 0;
+    tooltip.style.transform = "scale(0.95)";
   };
 
   // Y-axis grid + labels
@@ -119,7 +125,21 @@ export function drawXPLineGraph(transactions, containerId) {
     svg.appendChild(label);
   });
 
-  // Line path
+  // Area fill under the line (near-white)
+  const areaPath = points.map((p, i) => {
+    const x = padding + i * stepX;
+    const y = height - padding - (p.xp - niceMin) * stepY;
+    return `${i === 0 ? "M" : "L"}${x},${y}`;
+  }).join(" ") +
+    ` L${padding + (points.length - 1) * stepX},${height - padding}` +
+    ` L${padding},${height - padding} Z`;
+  const area = document.createElementNS(svgNS, "path");
+  area.setAttribute("d", areaPath);
+  area.setAttribute("fill", "#f6f5ff"); // near-white
+  area.setAttribute("stroke", "none");
+  svg.appendChild(area);
+
+  // Line path (purple border)
   const pathData = points.map((p, i) => {
     const x = padding + i * stepX;
     const y = height - padding - (p.xp - niceMin) * stepY;
@@ -129,11 +149,11 @@ export function drawXPLineGraph(transactions, containerId) {
   const path = document.createElementNS(svgNS, "path");
   path.setAttribute("d", pathData);
   path.setAttribute("fill", "none");
-  path.setAttribute("stroke", "#3498db");
+  path.setAttribute("stroke", "#8b5cf6"); // purple-500
   path.setAttribute("stroke-width", "2.5");
   svg.appendChild(path);
 
-  // Points
+  // Points (purple border)
   points.forEach((p, i) => {
     const x = padding + i * stepX;
     const y = height - padding - (p.xp - niceMin) * stepY;
@@ -142,7 +162,9 @@ export function drawXPLineGraph(transactions, containerId) {
     dot.setAttribute("cx", x);
     dot.setAttribute("cy", y);
     dot.setAttribute("r", "4");
-    dot.setAttribute("fill", "#3498db");
+    dot.setAttribute("fill", "#fff"); // white center
+    dot.setAttribute("stroke", "#8b5cf6"); // purple border
+    dot.setAttribute("stroke-width", "2");
     dot.style.cursor = "pointer";
 
     dot.addEventListener("mouseover", e =>
@@ -152,6 +174,17 @@ export function drawXPLineGraph(transactions, containerId) {
 
     svg.appendChild(dot);
   });
+
+  // Add title
+  const title = document.createElementNS(svgNS, "text");
+  title.setAttribute("x", width / 2);
+  title.setAttribute("y", 38);
+  title.setAttribute("text-anchor", "middle");
+  title.setAttribute("font-size", "22");
+  title.setAttribute("font-weight", "bold");
+  title.setAttribute("fill", "#222");
+  title.textContent = "Cumulative XP Graph";
+  svg.appendChild(title);
 
   container.innerHTML = "";
   container.appendChild(svg);

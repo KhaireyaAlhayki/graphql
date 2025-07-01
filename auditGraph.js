@@ -72,8 +72,8 @@ export function drawAuditGraph(data) {
     svg.appendChild(valueText);
   };
 
-  drawBar(margin.top, "Audits Done", up, "#34d399");
-  drawBar(margin.top + barHeight + 30, "Audits Received", down, "#f87171");
+  drawBar(margin.top, "Audits Done", up, "#a855f7");
+  drawBar(margin.top + barHeight + 30, "Audits Received", down, "#6366f1");
 
   container.appendChild(svg);
 }

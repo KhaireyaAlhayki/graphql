@@ -9,54 +9,107 @@ body {
 
 .login-container {
   max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  margin: 60px auto 0 auto;
+  padding: 36px 32px 28px 32px;
+  border: none;
+  border-radius: 18px;
   background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  box-shadow: 0 8px 32px rgba(60, 72, 88, 0.13), 0 1.5px 6px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.login-logo {
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: center;
+}
+.login-logo img {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  background: #f4f6fa;
 }
 
 .login-container h2 {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   text-align: center;
+  color: #2c3e50;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+#login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .login-fields {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
+  width: 100%;
 }
 
 .input-field {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border: 1.5px solid #e1e5e9;
+  border-radius: 7px;
   font-size: 16px;
+  background: #f8f9fa;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
   box-sizing: border-box;
+}
+.input-field:focus {
+  border-color: #667eea;
+  background: #fff;
+  box-shadow: 0 0 0 2px #667eea22;
 }
 
 .login-btn {
   width: 100%;
-  padding: 10px;
-  background-color: #007bff;
+  padding: 12px 0;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 7px;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background 0.2s;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
 }
-.login-btn:hover {
-  background: #0056b3;
+.login-btn:hover, .login-btn:focus {
+  background: linear-gradient(90deg, #5a67d8 0%, #6b47b6 100%);
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.13);
+  transform: translateY(-1px) scale(1.01);
 }
 
-.error-message {
+.login-footer {
+  margin-top: 18px;
+  text-align: center;
+  color: #888;
+  font-size: 15px;
+  opacity: 0.95;
+}
+
+/* Error message styling for login */
+#error-message {
+  margin-top: 12px;
+  margin-bottom: -8px;
   color: #dc3545;
-  margin-top: 10px;
   text-align: center;
   font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
 }
 
 .profile-container {
@@ -260,11 +313,10 @@ body {
 
 /* Completely remove "A4 paper" look of graph card */
 #xp-graph-card {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  margin-top: 30px;
+  background: #fff !important;
+  box-shadow: 0 2px 12px rgba(102, 126, 234, 0.07) !important;
+  padding: 24px 18px 18px 18px !important;
+  margin-top: 0 !important;
   width: 100% !important;
   max-width: none !important;
 }
@@ -459,6 +511,54 @@ body {
 
 .modal-body::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
+}
+
+/* Graph Card Styles */
+.graph-card {
+  background: #fff;
+  border: 2px solid #e1e5e9;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(102, 126, 234, 0.07);
+  padding: 24px 18px 18px 18px;
+  margin-bottom: 24px;
+  margin-right: 0;
+  margin-left: 0;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 320px;
+  min-height: 320px;
+  max-width: 100%;
+}
+
+.graph-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #4c51bf;
+  margin-bottom: 18px;
+  letter-spacing: 0.2px;
+  text-align: center;
+}
+
+#skills-graph svg,
+#stats-graph svg,
+#audit-graph svg {
+  background: #f8f9fa !important;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.06);
+}
+
+/* Consistent color palette for graphs */
+/* Blue, purple, green, and soft gray backgrounds */
+#skills-graph-card {
+  border-color: #a5b4fc;
+}
+#xp-graph-card {
+  border-color: #60a5fa;
+}
+#audit-graph-card {
+  border-color: #34d399;
 }
 
 

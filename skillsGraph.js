@@ -172,6 +172,17 @@ function renderSkillsGraph(container, skillsData) {
     svg.appendChild(dot);
   });
 
+  // Add title
+  const title = document.createElementNS("http://www.w3.org/2000/svg", "text");
+  title.setAttribute("x", width / 2);
+  title.setAttribute("y", 24);
+  title.setAttribute("text-anchor", "middle");
+  title.setAttribute("font-size", "22");
+  title.setAttribute("font-weight", "bold");
+  title.setAttribute("fill", "#222");
+  title.textContent = "Skills";
+  svg.appendChild(title);
+
   // Clear container and append the SVG
   container.innerHTML = "";
   container.appendChild(svg);

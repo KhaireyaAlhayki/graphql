@@ -1,0 +1,311 @@
+/* Profile Container */
+.profile-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Profile Header */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem 2rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.08);
+  border: 1px solid var(--purple-100);
+}
+
+.profile-header h2 {
+  margin: 0;
+  font-size: 1.75rem;
+  color: var(--purple-900);
+}
+
+/* Main Profile Layout */
+.profile-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Data Cards - Restoring the clear separation */
+.data-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.05);
+  border: 1px solid var(--purple-100);
+}
+
+.data-card h3 {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--purple-100);
+  color: var(--purple-800);
+  font-size: 1.25rem;
+}
+
+/* Data Lists */
+.data-list {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+/* Custom scrollbar for data lists */
+.data-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.data-list::-webkit-scrollbar-track {
+  background: var(--purple-50);
+  border-radius: 3px;
+}
+
+.data-list::-webkit-scrollbar-thumb {
+  background: var(--purple-300);
+  border-radius: 3px;
+}
+
+
+/* Data Rows - Improved from original */
+.data-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  justify-content: stretch;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--purple-50);
+  gap: 0.5rem;
+}
+
+.data-row span,
+.data-row .pass,
+.data-row .fail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.data-row:last-child {
+  border-bottom: none;
+}
+
+.data-row span:first-child {
+  font-weight: 500;
+  color: var(--purple-800);
+}
+
+/* Status badges */
+.pass {
+  color: var(--success);
+  font-weight: 600;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.fail {
+  color: var(--error);
+  font-weight: 600;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+/* Audit Ratio Box - Special Styling */
+#audit-ratio-box {
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+.audit-ratio-display {
+  background: linear-gradient(135deg, var(--purple-500) 0%, var(--purple-700) 100%);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  margin: 1rem 0;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.ratio-value {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ratio-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Show More Indicator */
+.show-more-indicator {
+  text-align: center;
+  padding: 0.75rem;
+  color: var(--purple-600);
+  font-weight: 500;
+  font-size: 0.875rem;
+  border-top: 1px solid var(--purple-50);
+  background: var(--purple-50);
+  border-radius: 0 0 0.75rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.show-more-indicator:hover {
+  background: var(--purple-100);
+  color: var(--purple-800);
+}
+
+/* Profile Graphs Section */
+.profile-graphs {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.graph-container {
+  min-width: 0;
+  max-width: 100%;
+  margin-bottom: 0;
+}
+
+/* Empty States */
+.empty {
+  color: var(--purple-400);
+  text-align: center;
+  padding: 2rem 0;
+  font-style: italic;
+}
+
+.data-cards-row {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.data-cards-row .data-card {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .data-cards-row {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+.personal-info-card {
+  background: linear-gradient(135deg, #f6f5ff 0%, #ede9fe 100%);
+  border-radius: 1.25rem;
+  border: 2.5px solid #a78bfa;
+  box-shadow: 0 4px 18px rgba(139, 92, 246, 0.10);
+  padding: 2.2rem 2rem 2rem 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.personal-info-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #7c3aed;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.personal-info-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a78bfa 0%, #f6d0fe 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.10);
+}
+
+.personal-info-avatar img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ede9fe;
+}
+
+.personal-info-list {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.personal-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #e9d5ff;
+  font-size: 1.08rem;
+}
+
+.personal-info-row:last-child {
+  border-bottom: none;
+}
+
+.personal-info-row span:first-child {
+  color: #7c3aed;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+}
+
+.fancy-card {
+  background: linear-gradient(135deg, #f6f5ff 0%, #ede9fe 100%);
+  border-radius: 1.25rem;
+  border: 2.5px solid #a78bfa;
+  box-shadow: 0 4px 18px rgba(139, 92, 246, 0.10);
+  padding: 2.2rem 2rem 2rem 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.fancy-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #7c3aed;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
