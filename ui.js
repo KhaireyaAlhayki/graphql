@@ -1,10 +1,10 @@
-// ui.js
 
 import { drawXPLineGraph } from "./xpGraphs.js";
 import { drawAuditGraph } from "./auditGraph.js";
 import { fetchAuditStats } from "./graphql.js";
 import { fetchRecentAudits } from "./graphql.js";
 import { fetchAuditRatio } from "./graphql.js";
+import { drawSkillsGraph } from './skillsGraph.js';
 
 
 function showLoginForm() {
@@ -17,28 +17,6 @@ function showLoginForm() {
 }
 
 function renderAuditList(audits) {
-  if (!audits.length) return "<div class=\"empty\">No recent audits.</div>";
-
-  return audits
-    .map(a => {
-      const project = a.group?.object?.name ?? "Unknown";
-      const passed = Number(a.grade) >= 1;
-      const gradeBadge = passed
-        ? `<span class="pass">PASS</span>`
-        : `<span class="fail">FAIL</span>`;
-
-      return `
-        <div class="data-row">
-          <span><strong>${project}</strong></span>
-          <span>${new Date(a.createdAt).toLocaleDateString("en-US")}</span>
-          ${gradeBadge}
-        </div> 
-      `;
-    })
-    .join("");
-}
-
-function renderFullAuditList(audits) {
   if (!audits.length) return "<div class=\"empty\">No recent audits.</div>";
 
   return audits
@@ -100,9 +78,6 @@ function showProfile(user) {
       labelOrder.push(label);
     }
     xpByProject[label] += tx.amount;
-
-    console.log("LABEL CHECK:", label);
-
   });
   // Now build cumulative XP
   let cumulativeXP = 0;
@@ -182,6 +157,7 @@ function showProfile(user) {
 
       </div>
       <div class="profile-graphs">
+        <div id="skills-graph"></div>
         <div id="stats-graph">📊 (Graphs come next)</div>
         <div id="audit-graph">📊 (Audit Graph)</div>
       </div>
@@ -197,8 +173,6 @@ function showProfile(user) {
 
   fetchRecentAudits(user.id)
   .then(audits => {
-    console.log("▶️ Fetching recent audits for user ID:", user.id);
-    console.log("📦 Recent audits response:", audits);
     const displayAudits = audits.slice(0, 5);
     const hasMoreAudits = audits.length > 5;
 
@@ -228,6 +202,8 @@ function showProfile(user) {
     console.error("Failed to fetch audit ratio:", err);
     document.getElementById("audit-ratio-value").textContent = "N/A";
   });
+
+  drawSkillsGraph();
 
 }
 

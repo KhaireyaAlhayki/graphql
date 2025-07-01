@@ -167,8 +167,7 @@ export async function fetchRecentAudits(auditorId) {
 }
 
 
-
-async function graphQLRequest(query, variables = {}) {
+export async function graphQLRequest(query, variables = {}) {
   const token = getToken();
   if (!token) throw new Error("No JWT token");
 
@@ -208,7 +207,7 @@ export async function fetchAuditRatio(userId) {
 
   const up = data?.data?.up?.aggregate?.sum?.amount || 0;
   const down = data?.data?.down?.aggregate?.sum?.amount || 1; // Avoid divide by zero
-  return (up / down).toFixed(2);
+  return (up / down).toFixed(1);
 }
 
 
