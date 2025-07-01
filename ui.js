@@ -206,11 +206,11 @@ function showProfile(user) {
   .then(audits => {
     console.log("▶️ Fetching recent audits for user ID:", user.id);
     console.log("📦 Recent audits response:", audits);
-    document.getElementById("recent-audits").innerHTML = renderAuditList(audits, null);
+    document.getElementById("recent-audits").innerHTML = renderAuditList(audits);
     
-    // Add click event for audits modal (only if there are audits)
+    // Add click event for audits modal
     const auditsCard = document.querySelector('.data-card:has(#recent-audits)');
-    if (auditsCard && audits.length > 0) {
+    if (auditsCard && audits.length > 5) {
       auditsCard.style.cursor = 'pointer';
       auditsCard.addEventListener('click', () => showModal('Recent Audits Done', renderFullAuditList(audits)));
     }
@@ -273,49 +273,5 @@ function showError(message) {
   errorDiv.textContent = message;
   errorDiv.style.display = message ? 'block' : 'none';
 }
-
-function showModal(title, content) {
-  // Remove existing modal if any
-  const existingModal = document.getElementById('results-modal');
-  if (existingModal) {
-    existingModal.remove();
-  }
-
-  const modal = document.createElement('div');
-  modal.id = 'results-modal';
-  modal.className = 'modal-overlay';
-  modal.innerHTML = `
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>${title}</h3>
-        <button class="modal-close" onclick="closeModal()">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="data-list">
-          ${content}
-        </div>
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(modal);
-  
-  // Close modal when clicking outside
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      closeModal();
-    }
-  });
-}
-
-function closeModal() {
-  const modal = document.getElementById('results-modal');
-  if (modal) {
-    modal.remove();
-  }
-}
-
-// Make closeModal available globally
-window.closeModal = closeModal;
 
 export { showLoginForm, showProfile, showError };
