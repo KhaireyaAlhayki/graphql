@@ -136,10 +136,9 @@ export async function fetchAuditStats() {
   };
 }
 
-// 👉 ADD THIS
 export async function fetchRecentAudits(auditorId) {
   const query = `
-    query RecentAudits($auditorId: Int!, $limit: Int!) {
+    query RecentAudits($auditorId: Int!) {
       audit(
         where: {
           auditorId: { _eq: $auditorId },
@@ -148,10 +147,9 @@ export async function fetchRecentAudits(auditorId) {
               type: { _eq: "project" }
             }
           },
-          grade: { _is_null: false }  # Only completed audits
+          grade: { _is_null: false }
         },
-        order_by: { createdAt: desc },
-        limit: $limit
+        order_by: { createdAt: desc }
       ) {
         grade
         createdAt
@@ -162,14 +160,13 @@ export async function fetchRecentAudits(auditorId) {
     }
   `;
 
-  const variables = {
-    auditorId: auditorId,
-    limit: 5,
-  };
+  const variables = { auditorId };
 
   const data = await graphQLRequest(query, variables);
   return data?.data?.audit || [];
 }
+
+
 
 async function graphQLRequest(query, variables = {}) {
   const token = getToken();

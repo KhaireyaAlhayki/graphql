@@ -16,13 +16,10 @@ function showLoginForm() {
   `;
 }
 
-function renderAuditList(audits, limit = 5) {
+function renderAuditList(audits) {
   if (!audits.length) return "<div class=\"empty\">No recent audits.</div>";
 
-  const displayAudits = limit ? audits.slice(0, limit) : audits;
-  const hasMore = limit && audits.length > limit;
-
-  const auditRows = displayAudits
+  return audits
     .map(a => {
       const project = a.group?.object?.name ?? "Unknown";
       const passed = Number(a.grade) >= 1;
@@ -39,10 +36,6 @@ function renderAuditList(audits, limit = 5) {
       `;
     })
     .join("");
-
-  const showMoreIndicator = hasMore ? `<div class="show-more-indicator">+${audits.length - limit} more</div>` : '';
-  
-  return auditRows + showMoreIndicator;
 }
 
 function renderFullAuditList(audits) {
@@ -206,45 +199,26 @@ function showProfile(user) {
   .then(audits => {
     console.log("▶️ Fetching recent audits for user ID:", user.id);
     console.log("📦 Recent audits response:", audits);
-    document.getElementById("recent-audits").innerHTML = renderAuditList(audits);
-    
-    // Add click event for audits modal
-    const auditsCard = document.querySelector('.data-card:has(#recent-audits)');
-    if (auditsCard && audits.length > 5) {
-      auditsCard.style.cursor = 'pointer';
-      auditsCard.addEventListener('click', () => showModal('Recent Audits Done', renderFullAuditList(audits)));
-    }
+    const displayAudits = audits.slice(0, 5);
+    const hasMoreAudits = audits.length > 5;
+
+    document.getElementById("recent-audits").innerHTML = 
+      renderAuditList(displayAudits) +
+      (hasMoreAudits
+        ? `<div class="show-more-indicator" id="show-more-audits">+${audits.length - 5} more</div>`
+        : "");
+
+        if (hasMoreAudits) {
+          document.getElementById("show-more-audits").addEventListener("click", () => {
+            document.getElementById("recent-audits").innerHTML = renderAuditList(audits);
+          });
+        }
+        
+
   })
   .catch(err => console.error("Failed to load recent audits:", err));
 
-  // Add click event for grades modal
-  const gradesCard = document.querySelector('.data-card:has(#recent-grades)');
-  if (gradesCard) {
-    const filteredGrades = user.recentProgress
-      .filter(p => p.grade !== null)
-      .map(p => {
-        const label = getProjectName(p.path);
-        if (!label || label === "piscine-js" || label.toLowerCase().includes("checkpoint")) return null;
-        return { label, grade: p.grade, createdAt: p.createdAt };
-      })
-      .filter(Boolean);
-    
-    if (filteredGrades.length > 5) {
-      gradesCard.style.cursor = 'pointer';
-      gradesCard.addEventListener('click', () => {
-        const fullGradesList = filteredGrades.map(p => `
-          <div class="data-row">
-            <span><strong>${p.label}</strong></span>
-            <span>${new Date(p.createdAt).toLocaleDateString()}</span>
-            <span class="${Number(p.grade) >= 1 ? 'pass' : 'fail'}">
-              ${Number(p.grade) >= 1 ? 'PASS' : 'FAIL'}
-            </span>
-          </div>
-        `).join('');
-        showModal('Recent Grades', fullGradesList);
-      });
-    }
-  }
+
 
   fetchAuditRatio(user.id)
   .then(ratio => {
