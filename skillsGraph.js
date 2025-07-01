@@ -180,7 +180,7 @@ function renderSkillsGraph(container, skillsData) {
   title.setAttribute("font-size", "22");
   title.setAttribute("font-weight", "bold");
   title.setAttribute("fill", "#222");
-  title.textContent = "Skills";
+  // title.textContent = "Skills";
   svg.appendChild(title);
 
   // Clear container and append the SVG

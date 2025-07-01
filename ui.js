@@ -5,20 +5,20 @@ import { drawSkillsGraph } from "./skillsGraph.js";
 
 function showLoginForm() {
   document.getElementById("app").innerHTML = `
-    <div class="login-container">
-      <div class="login-logo">
-        <img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="Logo" />
-      </div>
-      <h2>Sign in to Your Account</h2>
-      <form id="login-form" autocomplete="on">
-        <div class="login-fields">
-          <input type="text" id="username" class="input-field" placeholder="Username or Email" autocomplete="username" required />
-          <input type="password" id="password" class="input-field" placeholder="Password" autocomplete="current-password" required />
+    <div class="fancy-login-bg">
+      <div class="login-container glass-card">
+        <div class="login-logo">
+          <img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="Logo" />
         </div>
-        <button type="submit" class="login-btn">Sign In</button>
-      </form>
-      <div class="login-footer">
-        <span>Forgot your password?</span>
+        <h2 class="login-title">Sign in to Your Account</h2>
+        <form id="login-form" autocomplete="on">
+          <div class="login-fields">
+            <input type="text" id="username" class="input-field" placeholder="Username or Email" autocomplete="username" required />
+            <input type="password" id="password" class="input-field" placeholder="Password" autocomplete="current-password" required />
+          </div>
+          <button type="submit" class="login-btn">Sign In</button>
+        </form>
+        <div id="error-message" class="error-message" style="display:none;"></div>
       </div>
     </div>
   `;
@@ -103,7 +103,7 @@ function showProfile(user) {
   document.getElementById("app").innerHTML = `
     <div class="profile-container">
       <div class="profile-header">
-        <h2>Profile</h2>
+        <h2>Hello, ${username}!</h2>
         <button class="logout-btn" id="logout-btn">Logout</button>
       </div>
       <div class="profile-data">
@@ -124,37 +124,28 @@ function showProfile(user) {
         <div class="personal-info-card fancy-card">
           <h3><span>Recent Grades</span></h3>
           <div class="personal-info-list" id="recent-grades">
-            ${
-              (() => {
-                const filteredGrades = user.recentProgress
-                  .filter(p => p.grade !== null)
-                  .map(p => {
-                    const label = getProjectName(p.path);
-                    if (!label || label === "piscine-js" || label.toLowerCase().includes("checkpoint")) return null;
-                    return { label, grade: p.grade, createdAt: p.createdAt };
-                  })
-                  .filter(Boolean);
+            ${(() => {
+              const filteredGrades = user.recentProgress
+                .filter(p => p.grade !== null)
+                .map(p => {
+                  const label = getProjectName(p.path);
+                  if (!label || label === "piscine-js" || label.toLowerCase().includes("checkpoint")) return null;
+                  return { label, grade: p.grade, createdAt: p.createdAt };
+                })
+                .filter(Boolean);
 
-                const displayGrades = filteredGrades.slice(0, 5);
-                const hasMore = filteredGrades.length > 5;
+              const displayGrades = filteredGrades.slice(0, 5);
 
-                const gradeRows = displayGrades.map(p => `
-                  <div class="personal-info-row">
-                    <span><strong>${p.label}</strong></span>
-                    <span>${new Date(p.createdAt).toLocaleDateString()}</span>
-                    <span class="${Number(p.grade) >= 1 ? 'pass' : 'fail'}">
-                      ${Number(p.grade) >= 1 ? 'PASS' : 'FAIL'}
-                    </span>
-                  </div>
-                `).join('');
+              const gradeRows = displayGrades.map(p => `
+                <div class="personal-info-row">
+                  <span>${p.label}</span>
+                  <span>${new Date(p.createdAt).toLocaleDateString()}</span>
+                  <span class="${Number(p.grade) >= 1 ? 'pass' : 'fail'}">${Number(p.grade) >= 1 ? 'PASS' : 'FAIL'}</span>
+                </div>
+              `).join('');
 
-                const showMore = hasMore
-                  ? `<div class="show-more-indicator" data-section="grades">+${filteredGrades.length - 5} more</div>`
-                  : '';
-
-                return gradeRows + showMore || `<div class="empty">No graded submissions.</div>`;
-              })()
-            }
+              return gradeRows || `<div class="empty">No graded submissions.</div>`;
+            })()}
           </div>
         </div>
         <div class="personal-info-card fancy-card">
@@ -176,13 +167,13 @@ function showProfile(user) {
           <h3 class="graph-title">Skills</h3>
           <div id="skills-graph"></div>
         </div>
+        <div class="graph-container" id="audit-graph-card">
+          <h3 class="graph-title">Audit Points</h3>
+          <div id="audit-graph"></div>
+        </div>
         <div class="graph-container" id="xp-graph-card">
           <h3 class="graph-title">Cumulative XP Graph</h3>
           <div id="stats-graph"></div>
-        </div>
-        <div class="graph-container" id="audit-graph-card">
-          <h3 class="graph-title">Audit Ratio</h3>
-          <div id="audit-graph"></div>
         </div>
       </div>
     </div>
@@ -197,15 +188,12 @@ function showProfile(user) {
   fetchRecentAudits(user.id)
     .then(audits => {
       const displayAudits = audits.slice(0, 5);
-      const hasMore = audits.length > 5;
-
-      document.getElementById("recent-audits").innerHTML =
-        renderAuditList(displayAudits) +
-        (hasMore
-          ? `<div class="show-more-indicator" data-section="audits">+${audits.length - 5} more</div>`
-          : "");
-
-      setupShowMoreHandlers();
+      document.getElementById("recent-audits").innerHTML = displayAudits.map(a => {
+        const project = a.group?.object?.name ?? "Unknown";
+        const passed = Number(a.grade) >= 1;
+        const gradeBadge = passed ? `<span class='pass'>PASS</span>` : `<span class='fail'>FAIL</span>`;
+        return `<div class='personal-info-row'><span>${project}</span><span>${new Date(a.createdAt).toLocaleDateString()}</span>${gradeBadge}</div>`;
+      }).join("") || `<div class='empty'>No recent audits.</div>`;
     })
     .catch(err => console.error("Failed to load recent audits:", err));
 

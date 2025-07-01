@@ -53,3 +53,60 @@
   stroke: white;
   stroke-width: 2;
 }
+
+#skills-graph-card,
+#xp-graph-card,
+#audit-graph-card {
+  min-width: 800px;
+  min-height: 400px;
+  width: 100%;
+  max-width: 100%;
+}
+
+#audit-graph-card {
+  min-width: 900px;
+  min-height: 380px;
+  width: 100%;
+  max-width: 100%;
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+
+#audit-graph svg {
+  width: 100% !important;
+  height: 320px !important;
+  min-width: 600px;
+  min-height: 320px;
+  max-width: 100%;
+  display: block;
+}
+
+.fancy-card {
+  min-width: 340px;
+  min-height: 220px;
+  font-size: 2.1rem;
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.audit-ratio-display {
+  min-width: 180px;
+  min-height: 120px;
+  font-size: 2.5rem;
+  padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ratio-value {
+  font-size: 3.5rem;
+}
+

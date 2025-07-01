@@ -5,20 +5,20 @@ export function drawAuditGraph(data) {
   container.innerHTML = "";
 
   const svgNS = "http://www.w3.org/2000/svg";
-  const width = 600;
-  const height = 240;
-  const barHeight = 30;
-  const margin = { top: 60, right: 40, bottom: 30, left: 120 };
+  const width = container.clientWidth || 900; // Responsive width
+  const height = 320; // Taller for bigger bars
+  const barHeight = 48;
+  const margin = { top: 70, right: 60, bottom: 40, left: 180 };
 
   const svg = document.createElementNS(svgNS, "svg");
   svg.setAttribute("width", "100%");
   svg.setAttribute("height", height);
   svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
   svg.style.background = "#fafafa";
-  svg.style.border = "1px solid #ddd";
-  svg.style.borderRadius = "12px";
-  svg.style.boxShadow = "0 6px 20px rgba(0,0,0,0.05)";
-  svg.style.padding = "10px";
+  svg.style.border = "1.5px solid #ddd";
+  svg.style.borderRadius = "18px";
+  svg.style.boxShadow = "0 8px 32px rgba(139,92,246,0.07)";
+  svg.style.padding = "18px";
 
   if (!data || typeof data.up !== 'number' || typeof data.down !== 'number') {
     container.textContent = "No audit data";
@@ -32,12 +32,12 @@ export function drawAuditGraph(data) {
   // Title
   const title = document.createElementNS(svgNS, "text");
   title.setAttribute("x", width / 2);
-  title.setAttribute("y", 35);
+  title.setAttribute("y", 48);
   title.setAttribute("text-anchor", "middle");
-  title.setAttribute("font-size", "20");
+  title.setAttribute("font-size", "28");
   title.setAttribute("font-weight", "bold");
-  title.setAttribute("fill", "#222");
-  title.textContent = "Audit Ratio";
+  title.setAttribute("fill", "#4c1d95");
+  title.textContent = "Audit Points";
   svg.appendChild(title);
 
   const drawBar = (y, label, value, color) => {
@@ -49,31 +49,47 @@ export function drawAuditGraph(data) {
     rect.setAttribute("width", barWidth);
     rect.setAttribute("height", barHeight);
     rect.setAttribute("fill", color);
-    rect.setAttribute("rx", 8);
+    rect.setAttribute("rx", 14);
     svg.appendChild(rect);
 
     const labelText = document.createElementNS(svgNS, "text");
-    labelText.setAttribute("x", margin.left - 15);
+    labelText.setAttribute("x", margin.left - 20);
     labelText.setAttribute("y", y + barHeight / 2);
     labelText.setAttribute("text-anchor", "end");
     labelText.setAttribute("dominant-baseline", "middle");
-    labelText.setAttribute("font-size", "14");
-    labelText.setAttribute("fill", "#444");
+    labelText.setAttribute("font-size", "18");
+    labelText.setAttribute("fill", "#5b21b6");
+    labelText.setAttribute("font-weight", "700");
     labelText.textContent = label;
     svg.appendChild(labelText);
 
     const valueText = document.createElementNS(svgNS, "text");
-    valueText.setAttribute("x", margin.left + barWidth + 10);
+    valueText.setAttribute("x", margin.left + barWidth + 18);
     valueText.setAttribute("y", y + barHeight / 2);
     valueText.setAttribute("dominant-baseline", "middle");
-    valueText.setAttribute("font-size", "13");
-    valueText.setAttribute("fill", "#333");
+    valueText.setAttribute("font-size", "17");
+    valueText.setAttribute("fill", "#312e81");
+    valueText.setAttribute("font-weight", "600");
     valueText.textContent = `${value.toLocaleString()} XP`;
     svg.appendChild(valueText);
   };
 
-  drawBar(margin.top, "Audits Done", up, "#a855f7");
-  drawBar(margin.top + barHeight + 30, "Audits Received", down, "#6366f1");
+  drawBar(margin.top, "Audits Done", up, "url(#auditDoneGradient)");
+  drawBar(margin.top + barHeight + 40, "Audits Received", down, "url(#auditReceivedGradient)");
+
+  // Gradients
+  const defs = document.createElementNS(svgNS, "defs");
+  defs.innerHTML = `
+    <linearGradient id="auditDoneGradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="auditReceivedGradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+  `;
+  svg.appendChild(defs);
 
   container.appendChild(svg);
 }
