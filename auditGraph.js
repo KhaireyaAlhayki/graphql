@@ -6,7 +6,7 @@ export function drawAuditGraph(data) {
 
   const svgNS = "http://www.w3.org/2000/svg";
   const width = container.clientWidth || 900; // Responsive width
-  const height = 320; // Taller for bigger bars
+  const height = 700; // Much larger height for bigger graph
   const barHeight = 48;
   const margin = { top: 70, right: 60, bottom: 40, left: 180 };
 
@@ -15,7 +15,6 @@ export function drawAuditGraph(data) {
   svg.setAttribute("height", height);
   svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
   svg.style.background = "#fafafa";
-  svg.style.border = "1.5px solid #ddd";
   svg.style.borderRadius = "18px";
   svg.style.boxShadow = "0 8px 32px rgba(139,92,246,0.07)";
   svg.style.padding = "18px";

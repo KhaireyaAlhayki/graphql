@@ -155,9 +155,9 @@ function showProfile(user) {
           </div>
         </div>
         <div class="data-cards-row">
-        <div class="fancy-card" style="flex:0 0 300px;">
-          <h3>Audit Ratio</h3>
-          <div class="data-list" id="audit-ratio-box">
+        <div class="audit-card-container">
+          <div class="fancy-card audit-ratio-card">
+            <h3 class="audit-ratio-title">Audit Ratio</h3>
             <div class="audit-ratio-display">
               <div class="ratio-value" id="audit-ratio-value">Loading...</div>
               <div class="ratio-label">Completed per Received</div>

@@ -55,7 +55,18 @@
   stroke-width: 2;
 }
 
-#skills-graph-card,
+#skills-graph-card {
+  min-width: 520px;
+  min-height: 220px;
+  width: 100%;
+  max-width: 100%;
+  border: 1.5px solid #a78bfa;
+  border-radius: 0.9rem;
+  padding: 3rem 2.5rem 2.5rem 2.5rem;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #f6f5ff 0%, #ede9fe 100%);
+}
+
 #xp-graph-card,
 #audit-graph-card {
   min-width: 800px;
@@ -92,12 +103,6 @@
   display: block;
 }
 
-#stats-graph svg text {
-  font-size: 16px !important;
-  font-weight: 700 !important;
-  fill: #4c1d95 !important;
-}
-
 .fancy-card {
   min-width: 340px;
   min-height: 220px;
@@ -110,15 +115,22 @@
 }
 
 .audit-ratio-display {
+  background: linear-gradient(135deg, var(--purple-500) 0%, var(--purple-700) 100%);
+  color: white;
   min-width: 180px;
   min-height: 120px;
   font-size: 2.5rem;
   padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+  border-radius: 0.7rem;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 0.7rem 0;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2);
 }
+
 
 .ratio-value {
   font-size: 3.5rem;
