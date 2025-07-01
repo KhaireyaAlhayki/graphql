@@ -111,6 +111,7 @@
   background: rgba(16, 185, 129, 0.1);
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
+  text-align: center;
 }
 
 .fail {
@@ -119,6 +120,7 @@
   background: rgba(239, 68, 68, 0.1);
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
+  text-align: center;
 }
 
 /* Audit Ratio Box - Special Styling */
@@ -211,15 +213,16 @@
   align-items: flex-start;
 }
 
-.personal-info-card h3 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #7c3aed;
+.personal-info-card h3,
+.fancy-card h3,
+.graph-title {
+  color: #7c3aed !important;
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  width: 100%;
   margin-bottom: 1.5rem;
   letter-spacing: 0.2px;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
 }
 
 .personal-info-avatar {
@@ -299,18 +302,6 @@
   flex-direction: column;
   align-items: flex-start;
 }
-
-.fancy-card h3 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #7c3aed;
-  margin-bottom: 1.5rem;
-  letter-spacing: 0.2px;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-}
-
 
 .logout-btn {
   padding: 10px 28px;

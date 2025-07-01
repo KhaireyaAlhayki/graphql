@@ -37,7 +37,7 @@ export function drawAuditGraph(data) {
   title.setAttribute("font-size", "28");
   title.setAttribute("font-weight", "bold");
   title.setAttribute("fill", "#4c1d95");
-  title.textContent = "Audit Points";
+  title.textContent = "Audits Done vs Received";
   svg.appendChild(title);
 
   const drawBar = (y, label, value, color) => {

@@ -31,8 +31,8 @@ export function drawXPLineGraph(transactions, containerId) {
   });
 
   const width = container.clientWidth;   // Match container's actual width
-  const height = 420;
-  const padding = 110;
+  const height = 480;
+  const padding = 150;
 
   const xps = points.map(p => p.xp);
   const maxXP = Math.max(...xps);
@@ -183,7 +183,7 @@ export function drawXPLineGraph(transactions, containerId) {
   title.setAttribute("font-size", "22");
   title.setAttribute("font-weight", "bold");
   title.setAttribute("fill", "#222");
-  title.textContent = "Cumulative XP Graph";
+  title.textContent = "Your XP journey across projects";
   svg.appendChild(title);
 
   container.innerHTML = "";

@@ -121,38 +121,41 @@ function showProfile(user) {
             <div class="personal-info-row"><span>Country:</span> <span>${country}</span></div>
           </div>
         </div>
-        <div class="personal-info-card fancy-card">
-          <h3><span>Recent Grades</span></h3>
-          <div class="personal-info-list" id="recent-grades">
-            ${(() => {
-              const filteredGrades = user.recentProgress
-                .filter(p => p.grade !== null)
-                .map(p => {
-                  const label = getProjectName(p.path);
-                  if (!label || label === "piscine-js" || label.toLowerCase().includes("checkpoint")) return null;
-                  return { label, grade: p.grade, createdAt: p.createdAt };
-                })
-                .filter(Boolean);
+        <div class="personal-info-row-group" style="display: flex; gap: 1.5rem; width: 100%; justify-content: center; align-items: stretch; margin-bottom: 1.5rem;">
+          <div class="personal-info-card fancy-card" style="flex: 1 1 0; min-width: 0;">
+            <h3><span>Recent Grades</span></h3>
+            <div class="personal-info-list" id="recent-grades">
+              ${(() => {
+                const filteredGrades = user.recentProgress
+                  .filter(p => p.grade !== null)
+                  .map(p => {
+                    const label = getProjectName(p.path);
+                    if (!label || label === "piscine-js" || label.toLowerCase().includes("checkpoint")) return null;
+                    return { label, grade: p.grade, createdAt: p.createdAt };
+                  })
+                  .filter(Boolean);
 
-              const displayGrades = filteredGrades.slice(0, 5);
+                const displayGrades = filteredGrades.slice(0, 5);
 
-              const gradeRows = displayGrades.map(p => `
-                <div class="personal-info-row">
-                  <span>${p.label}</span>
-                  <span>${new Date(p.createdAt).toLocaleDateString()}</span>
-                  <span class="${Number(p.grade) >= 1 ? 'pass' : 'fail'}">${Number(p.grade) >= 1 ? 'PASS' : 'FAIL'}</span>
-                </div>
-              `).join('');
+                const gradeRows = displayGrades.map(p => `
+                  <div class="personal-info-row">
+                    <span>${p.label}</span>
+                    <span>${new Date(p.createdAt).toLocaleDateString()}</span>
+                    <span class="${Number(p.grade) >= 1 ? 'pass' : 'fail'}">${Number(p.grade) >= 1 ? 'PASS' : 'FAIL'}</span>
+                  </div>
+                `).join('');
 
-              return gradeRows || `<div class="empty">No graded submissions.</div>`;
-            })()}
+                return gradeRows || `<div class="empty">No graded submissions.</div>`;
+              })()}
+            </div>
+          </div>
+          <div class="personal-info-card fancy-card" style="flex: 1 1 0; min-width: 0;">
+            <h3><span>Recent Audits Done</span></h3>
+            <div class="personal-info-list" id="recent-audits"></div>
           </div>
         </div>
-        <div class="personal-info-card fancy-card">
-          <h3><span>Recent Audits Done</span></h3>
-          <div class="personal-info-list" id="recent-audits"></div>
-        </div>
-        <div class="fancy-card">
+        <div class="data-cards-row">
+        <div class="fancy-card" style="flex:0 0 300px;">
           <h3>Audit Ratio</h3>
           <div class="data-list" id="audit-ratio-box">
             <div class="audit-ratio-display">
@@ -161,12 +164,11 @@ function showProfile(user) {
             </div>
           </div>
         </div>
-      </div>
-      <div class="profile-graphs">
         <div class="graph-container" id="skills-graph-card">
           <h3 class="graph-title">Skills</h3>
           <div id="skills-graph"></div>
         </div>
+      </div>
         <div class="graph-container" id="audit-graph-card">
           <h3 class="graph-title">Audit Points</h3>
           <div id="audit-graph"></div>

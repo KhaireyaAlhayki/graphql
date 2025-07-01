@@ -1,9 +1,10 @@
 .graph-container {
-  background: white;
-  border-radius: 1rem;
-  padding: 1.5rem;
+  background: linear-gradient(135deg, #f6f5ff 0%, #ede9fe 100%);
+  border: 2.5px solid #a78bfa;
+  border-radius: 1.25rem;
+  padding: 2.2rem 2rem 2rem 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 18px rgba(139, 92, 246, 0.10);
 }
 
 .graph-title {
@@ -75,6 +76,13 @@
   justify-content: center;
 }
 
+#audit-graph svg,
+#stats-graph svg {
+  background: none !important;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.06);
+}
+
 #audit-graph svg {
   width: 100% !important;
   height: 320px !important;
@@ -82,6 +90,12 @@
   min-height: 320px;
   max-width: 100%;
   display: block;
+}
+
+#stats-graph svg text {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  fill: #4c1d95 !important;
 }
 
 .fancy-card {
