@@ -302,7 +302,9 @@ function showProfile(user) {
                   .filter(p => p.grade !== null)
                   .map(p => {
                     const label = getProjectName(p.path);
-                    if (!label || label === "piscine-js" || label.toLowerCase().includes("checkpoint")) return null;
+                    if (!label || label === "piscine-js" ||
+                       label.toLowerCase().includes("checkpoint") ||  
+                       label.toLowerCase().includes("piscine-rust")) return null;
                     return { label, grade: p.grade, createdAt: p.createdAt };
                   })
                   .filter(Boolean);

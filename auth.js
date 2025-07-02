@@ -24,11 +24,11 @@ async function login(username, password) {
     });
 
     if (!res.ok) {
-      if (res.status === 401) {
-        throw new Error("Invalid username or password");
+      if (res.status === 401 || res.status === 403) {
+        throw new Error("Invalid username/email or password");
       } else {
         const errorText = await res.text();
-        throw new Error(`Login failed: ${res.status} ${res.statusText}`);
+        throw new Error("Login failed. Please try again later.");
       }
     }
 
