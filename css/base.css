@@ -37,7 +37,7 @@
 
 body {
   font-family: var(--font-sans);
-  background: linear-gradient(120deg, #e9d0db 0%, #f6e3ea 100%);
+  background: linear-gradient(120deg, #69384a 0%, #9c8b92 100%);
   animation: bgMove 18s ease-in-out infinite alternate;
   background-size: 200% 200%;
   color: var(--gray-900);
