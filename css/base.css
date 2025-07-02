@@ -1,15 +1,15 @@
 :root {
-  /* Purple color palette */
-  --purple-50: #f5f3ff;
-  --purple-100: #ede9fe;
-  --purple-200: #ddd6fe;
-  --purple-300: #c4b5fd;
-  --purple-400: #a78bfa;
-  --purple-500: #8b5cf6;
-  --purple-600: #7c3aed;
-  --purple-700: #6d28d9;
-  --purple-800: #5b21b6;
-  --purple-900: #4c1d95;
+  /* Burgundy color palette */
+  --burgundy-50:   #fbeff2;
+  --burgundy-100:  #f6e3ea;
+  --burgundy-200:  #e6cfd6;
+  --burgundy-300:  #d1a3b3;
+  --burgundy-400:  #b96a7a;
+  --burgundy-500:  #a23a4d;
+  --burgundy-600:  #8a2437;
+  --burgundy-700:  #701a2a;
+  --burgundy-800:  #58121f;
+  --burgundy-900:  #3d0a13;
 
   /* Supporting colors */
   --success: #10b981;
@@ -37,20 +37,20 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--purple-50);
+  background-color: #c2a0af; /* darker maroonish background for the page */
   color: var(--gray-900);
   line-height: 1.5;
   
 }
 
 h1, h2, h3, h4 {
-  color: var(--purple-900);
+  color: var(--burgundy-900);
   font-weight: 600;
   line-height: 1.2;
 }
 
 a {
-  color: var(--purple-600);
+  color: var(--burgundy-600);
   text-decoration: none;
 }
 

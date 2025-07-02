@@ -1,7 +1,7 @@
 .fancy-login-bg {
   min-height: 100vh;
   width: 100vw;
-  background: linear-gradient(135deg, var(--purple-400) 0%, var(--purple-100) 100%);
+  background: linear-gradient(135deg, var(--burgundy-400) 0%, var(--burgundy-100) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,7 +16,7 @@
   box-shadow: 0 12px 32px rgba(139, 92, 246, 0.18), 0 2px 8px rgba(0,0,0,0.06);
   border-radius: 1.5rem;
   backdrop-filter: blur(8px);
-  border: 2.5px solid var(--purple-100);
+  border: 2.5px solid var(--burgundy-100);
   position: relative;
   z-index: 1;
 }
@@ -38,7 +38,7 @@
   width: 3.4rem;
   height: 3.4rem;
   margin: 0 auto 1rem;
-  background: linear-gradient(135deg, var(--purple-200) 0%, var(--purple-400) 100%);
+  background: linear-gradient(135deg, var(--burgundy-200) 0%, var(--burgundy-400) 100%);
   border-radius: 0.85rem;
   display: flex;
   align-items: center;
@@ -55,7 +55,7 @@
 .login-title {
   text-align: center;
   margin-bottom: 1.1rem;
-  color: var(--purple-800);
+  color: var(--burgundy-800);
   font-size: 1.45rem;
   font-weight: 800;
   letter-spacing: -0.5px;
@@ -66,16 +66,16 @@
   width: 100%;
   padding: 0.62rem 0.9rem;
   margin-bottom: 0.7rem;
-  border: 1.2px solid var(--purple-200);
+  border: 1.2px solid var(--burgundy-200);
   border-radius: 0.5rem;
   font-size: 0.95rem;
-  background: var(--purple-50);
+  background: var(--burgundy-50);
   transition: all 0.2s;
   outline: none;
   box-sizing: border-box;
 }
 .input-field:focus {
-  border-color: var(--purple-500);
+  border-color: var(--burgundy-500);
   background: #fff;
   box-shadow: 0 0 0 2.5px rgba(139, 92, 246, 0.11);
 }
@@ -83,7 +83,7 @@
 .login-btn {
   width: 100%;
   padding: 0.75rem 0;
-  background: linear-gradient(90deg, var(--purple-500) 0%, var(--purple-700) 100%);
+  background: linear-gradient(90deg, var(--burgundy-500) 0%, var(--burgundy-700) 100%);
   color: white;
   border: none;
   border-radius: 0.5rem;
@@ -96,7 +96,7 @@
   margin-top: 0.13rem;
 }
 .login-btn:hover, .login-btn:focus {
-  background: linear-gradient(90deg, var(--purple-700) 0%, var(--purple-400) 100%);
+  background: linear-gradient(90deg, var(--burgundy-700) 0%, var(--burgundy-400) 100%);
   box-shadow: 0 2.5px 12px rgba(139, 92, 246, 0.14);
   transform: translateY(-1px) scale(1.025);
 }
@@ -104,7 +104,7 @@
 .login-footer {
   margin-top: 1rem;
   text-align: center;
-  color: var(--purple-700);
+  color: var(--burgundy-700);
   font-size: 0.95rem;
   opacity: 0.97;
   letter-spacing: 0.07px;

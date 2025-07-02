@@ -30,8 +30,8 @@ export function drawXPLineGraph(transactions, containerId) {
     return { label, xp: cumulativeXP };
   });
 
-  const width = container.clientWidth;   // Match container's actual width
-  const height = 480;
+  const width = container.clientWidth;   
+  const height = 500;
   const padding = 150;
 
   const xps = points.map(p => p.xp);
@@ -105,7 +105,8 @@ export function drawXPLineGraph(transactions, containerId) {
     label.setAttribute("x", padding - 15);
     label.setAttribute("y", y + 4);
     label.setAttribute("text-anchor", "end");
-    label.setAttribute("font-size", "11");
+    label.setAttribute("font-size", "14");
+    label.setAttribute("font-weight", "700");
     label.setAttribute("fill", "#444");
     label.textContent = value >= 1000 ? `${value / 1000}k` : value;
     svg.appendChild(label);
@@ -118,7 +119,8 @@ export function drawXPLineGraph(transactions, containerId) {
     label.setAttribute("x", x);
     label.setAttribute("y", height - padding + 40);
     label.setAttribute("text-anchor", "end");
-    label.setAttribute("font-size", "11");
+    label.setAttribute("font-size", "14");
+    label.setAttribute("font-weight", "700");
     label.setAttribute("transform", `rotate(-40 ${x},${height - padding + 40})`);
     label.setAttribute("fill", "#333");
     label.textContent = p.label;
@@ -149,7 +151,7 @@ export function drawXPLineGraph(transactions, containerId) {
   const path = document.createElementNS(svgNS, "path");
   path.setAttribute("d", pathData);
   path.setAttribute("fill", "none");
-  path.setAttribute("stroke", "#8b5cf6"); // purple-500
+  path.setAttribute("stroke", "#a23a4d"); // purple-500
   path.setAttribute("stroke-width", "2.5");
   svg.appendChild(path);
 
@@ -163,7 +165,7 @@ export function drawXPLineGraph(transactions, containerId) {
     dot.setAttribute("cy", y);
     dot.setAttribute("r", "4");
     dot.setAttribute("fill", "#fff"); // white center
-    dot.setAttribute("stroke", "#8b5cf6"); // purple border
+    dot.setAttribute("stroke", "#a23a4d"); // purple border
     dot.setAttribute("stroke-width", "2");
     dot.style.cursor = "pointer";
 

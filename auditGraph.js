@@ -6,14 +6,15 @@ export function drawAuditGraph(data) {
 
   const svgNS = "http://www.w3.org/2000/svg";
   const width = container.clientWidth || 900; // Responsive width
-  const height = 700; // Much larger height for bigger graph
+  const height = 270; // 15% smaller than 320 for a more compact graph
   const barHeight = 48;
-  const margin = { top: 70, right: 60, bottom: 40, left: 180 };
+  const margin = { top: 60, right: 130, bottom: 30, left: 190 };
 
   const svg = document.createElementNS(svgNS, "svg");
   svg.setAttribute("width", "100%");
-  svg.setAttribute("height", height);
   svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+  svg.style.height = "auto";
+  svg.style.maxHeight = "100%";
   svg.style.background = "#fafafa";
   svg.style.borderRadius = "18px";
   svg.style.boxShadow = "0 8px 32px rgba(139,92,246,0.07)";
@@ -36,7 +37,7 @@ export function drawAuditGraph(data) {
   title.setAttribute("font-size", "28");
   title.setAttribute("font-weight", "bold");
   title.setAttribute("fill", "#4c1d95");
-  title.textContent = "Audits Done vs Received";
+  // title.textContent = "Audits Done vs Received";
   svg.appendChild(title);
 
   const drawBar = (y, label, value, color) => {
@@ -80,15 +81,22 @@ export function drawAuditGraph(data) {
   const defs = document.createElementNS(svgNS, "defs");
   defs.innerHTML = `
     <linearGradient id="auditDoneGradient" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="0%" stop-color="#b96a7a"/>
       <stop offset="100%" stop-color="#a855f7"/>
     </linearGradient>
     <linearGradient id="auditReceivedGradient" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="0%" stop-color="#8a2437"/>
       <stop offset="100%" stop-color="#818cf8"/>
     </linearGradient>
   `;
   svg.appendChild(defs);
 
   container.appendChild(svg);
+
+  // Add download icon after SVG is rendered (global-safe)
+  if (typeof window.addSVGDownloadButtons === 'function') {
+    window.addSVGDownloadButtons('#audit-graph', '#audit-graph svg', 'audit-points-graph');
+  } else if (typeof addSVGDownloadButtons === 'function') {
+    addSVGDownloadButtons('#audit-graph', '#audit-graph svg', 'audit-points-graph');
+  }
 }

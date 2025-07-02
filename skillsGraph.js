@@ -186,6 +186,11 @@ function renderSkillsGraph(container, skillsData) {
   // Clear container and append the SVG
   container.innerHTML = "";
   container.appendChild(svg);
+
+  // Add download button after SVG is rendered
+  if (typeof addSVGDownloadButtons === 'function') {
+    addSVGDownloadButtons('#skills-graph', '#skills-graph svg', 'skills-graph');
+  }
 }
 
 // Tooltip implementation
