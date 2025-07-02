@@ -60,19 +60,21 @@ export function drawXPLineGraph(transactions, containerId) {
   const tooltip = document.createElement("div");
   Object.assign(tooltip.style, {
     position: "absolute",
-    background: "#f6f5ff",
-    color: "#4c1d95",
-    padding: "12px 18px",
-    borderRadius: "10px",
+    background: "linear-gradient(135deg, rgba(253,247,250,0.92) 60%, rgba(246,227,234,0.85) 100%)", // glassy gradient
+    color: "#8a2437", // maroon text
+    padding: "14px 22px",
+    borderRadius: "18px",
     fontSize: "16px",
     fontWeight: "600",
-    boxShadow: "0 8px 32px rgba(139,92,246,0.10)",
-    border: "2px solid #ede9fe",
+    boxShadow: "0 8px 32px 0 rgba(162,58,77,0.13), 0 1.5px 8px rgba(162,58,77,0.08)", // maroon shadow
+    border: "2.5px solid #a23a4d", // dark pinkish maroon
     opacity: 0,
     pointerEvents: "none",
     zIndex: 1000,
-    transition: "opacity 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1)",
+    transition: "opacity 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.18s, border-color 0.18s",
     transform: "scale(0.95)",
+    backdropFilter: "blur(8px)",
+    WebkitBackdropFilter: "blur(8px)",
   });
   document.body.appendChild(tooltip);
 
@@ -87,6 +89,16 @@ export function drawXPLineGraph(transactions, containerId) {
     tooltip.style.opacity = 0;
     tooltip.style.transform = "scale(0.95)";
   };
+
+  // Add hover effect for border glow
+  tooltip.addEventListener('mouseenter', () => {
+    tooltip.style.boxShadow = '0 8px 32px 0 rgba(162,58,77,0.18), 0 1.5px 8px rgba(162,58,77,0.13)';
+    tooltip.style.borderColor = '#d72660';
+  });
+  tooltip.addEventListener('mouseleave', () => {
+    tooltip.style.boxShadow = '0 8px 32px 0 rgba(162,58,77,0.13), 0 1.5px 8px rgba(162,58,77,0.08)';
+    tooltip.style.borderColor = '#a23a4d';
+  });
 
   // Y-axis grid + labels
   for (let i = 0; i <= yTicks; i++) {
@@ -107,7 +119,7 @@ export function drawXPLineGraph(transactions, containerId) {
     label.setAttribute("text-anchor", "end");
     label.setAttribute("font-size", "14");
     label.setAttribute("font-weight", "700");
-    label.setAttribute("fill", "#444");
+    label.setAttribute("fill", "#5C4033"); // dark brown
     label.textContent = value >= 1000 ? `${value / 1000}k` : value;
     svg.appendChild(label);
   }
@@ -122,7 +134,7 @@ export function drawXPLineGraph(transactions, containerId) {
     label.setAttribute("font-size", "14");
     label.setAttribute("font-weight", "700");
     label.setAttribute("transform", `rotate(-40 ${x},${height - padding + 40})`);
-    label.setAttribute("fill", "#333");
+    label.setAttribute("fill", "#5C4033"); // dark brown
     label.textContent = p.label;
     svg.appendChild(label);
   });
@@ -184,7 +196,7 @@ export function drawXPLineGraph(transactions, containerId) {
   title.setAttribute("text-anchor", "middle");
   title.setAttribute("font-size", "22");
   title.setAttribute("font-weight", "bold");
-  title.setAttribute("fill", "#222");
+  title.setAttribute("fill", "#8B4513"); // saddle brown
   title.textContent = "Your XP journey across projects";
   svg.appendChild(title);
 

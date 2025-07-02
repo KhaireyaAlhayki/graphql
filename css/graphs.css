@@ -1,10 +1,21 @@
+.graph-container, #skills-graph-card, #audit-graph-card, #xp-graph-card {
+  background: rgba(255,255,255,0.75);
+  box-shadow: 0 8px 32px 0 rgba(162,58,77,0.10);
+  border: 1.5px solid rgba(162,58,77,0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 1.2rem;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.18s;
+}
+.graph-container:hover, #skills-graph-card:hover, #audit-graph-card:hover, #xp-graph-card:hover {
+  box-shadow: 0 12px 36px 0 rgba(162,58,77,0.18);
+  border-color: #a23a4d;
+  transform: scale(1.03);
+}
+
 .graph-container {
-  background: linear-gradient(135deg, var(--burgundy-50) 0%, var(--burgundy-100) 100%);
-  border: 2.5px solid #b96a7a;
-  border-radius: 1.25rem;
   padding: 2.2rem 2rem 2rem 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 18px rgba(139, 92, 246, 0.10);
 }
 
 .graph-title {
@@ -60,11 +71,8 @@
   min-height: 220px;
   width: 100%;
   max-width: 100%;
-  border: 1.5px solid #b96a7a;
-  border-radius: 0.9rem;
   padding: 3rem 2.5rem 2.5rem 2.5rem;
   box-sizing: border-box;
-  background: linear-gradient(135deg, var(--burgundy-50) 0%, var(--burgundy-100) 100%);
 }
 
 #xp-graph-card,
@@ -82,9 +90,6 @@
 
 /* Audit Graph Container */
 #audit-graph-card {
-  background: linear-gradient(135deg, var(--burgundy-50) 0%, var(--burgundy-100) 100%);
-  border: 1.5px solid #b96a7a;
-  border-radius: 1.1rem;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   width: 100%;

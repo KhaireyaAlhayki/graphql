@@ -58,7 +58,7 @@ export function drawAuditGraph(data) {
     labelText.setAttribute("text-anchor", "end");
     labelText.setAttribute("dominant-baseline", "middle");
     labelText.setAttribute("font-size", "18");
-    labelText.setAttribute("fill", "#5b21b6");
+    labelText.setAttribute("fill", "#8B4513");
     labelText.setAttribute("font-weight", "700");
     labelText.textContent = label;
     svg.appendChild(labelText);
@@ -68,7 +68,7 @@ export function drawAuditGraph(data) {
     valueText.setAttribute("y", y + barHeight / 2);
     valueText.setAttribute("dominant-baseline", "middle");
     valueText.setAttribute("font-size", "17");
-    valueText.setAttribute("fill", "#312e81");
+    valueText.setAttribute("fill", "#8B4513");
     valueText.setAttribute("font-weight", "600");
     valueText.textContent = `${value.toLocaleString()} XP`;
     svg.appendChild(valueText);

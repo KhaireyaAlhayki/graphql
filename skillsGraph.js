@@ -93,8 +93,11 @@ function renderSkillsGraph(container, skillsData) {
     });
     const polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
     polygon.setAttribute("points", points.map(p => p.join(",")).join(" "));
-    polygon.setAttribute("fill", l % 2 === 0 ? "rgba(76, 29, 149, 0.1)" : "rgba(76, 29, 149, 0.05)");
-    polygon.setAttribute("stroke", "rgba(76, 29, 149, 0.3)");
+    // Alternate between plum and merlot for grid
+    const gridColor = l % 2 === 0 ? "rgba(142, 69, 133, 0.10)" : "rgba(128, 0, 64, 0.08)";
+    const strokeColor = l % 2 === 0 ? "rgba(128, 0, 64, 0.18)" : "rgba(142, 69, 133, 0.18)";
+    polygon.setAttribute("fill", gridColor);
+    polygon.setAttribute("stroke", strokeColor);
     polygon.setAttribute("stroke-width", "1");
     svg.appendChild(polygon);
   }
@@ -109,7 +112,7 @@ function renderSkillsGraph(container, skillsData) {
     line.setAttribute("y1", cy);
     line.setAttribute("x2", x);
     line.setAttribute("y2", y);
-    line.setAttribute("stroke", "rgba(76, 29, 149, 0.4)");
+    line.setAttribute("stroke", "rgba(128, 0, 64, 0.28)"); // merlot
     line.setAttribute("stroke-width", "1");
     svg.appendChild(line);
   });
@@ -125,24 +128,45 @@ function renderSkillsGraph(container, skillsData) {
     label.setAttribute("text-anchor", "middle");
     label.setAttribute("font-size", "14");
     label.setAttribute("font-family", "'Segoe UI', system-ui, sans-serif");
-    label.setAttribute("fill", "#4c1d95");
+    label.setAttribute("fill", i % 2 === 0 ? "#8e4585" : "#800040"); // alternate plum/merlot
     label.setAttribute("font-weight", "600");
     label.textContent = skill;
     svg.appendChild(label);
   });
 
-  // Draw radar area
+  // Radar area gradient
   const radarPoints = skillPercentages.map((percentage, i) => {
     const r = (percentage / 100) * radius;
     const angle = i * angleStep - Math.PI / 2;
     return [cx + r * Math.cos(angle), cy + r * Math.sin(angle)];
   });
-  
+
+  // Add a gradient fill for the radar area
+  const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+  const gradId = "radarAreaGradient";
+  const grad = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
+  grad.setAttribute("id", gradId);
+  grad.setAttribute("x1", "0");
+  grad.setAttribute("y1", "0");
+  grad.setAttribute("x2", "1");
+  grad.setAttribute("y2", "1");
+  const stop1 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+  stop1.setAttribute("offset", "0%");
+  stop1.setAttribute("stop-color", "#8e4585"); // plum
+  stop1.setAttribute("stop-opacity", "0.32");
+  grad.appendChild(stop1);
+  const stop2 = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+  stop2.setAttribute("offset", "100%");
+  stop2.setAttribute("stop-color", "#800040"); // merlot
+  stop2.setAttribute("stop-opacity", "0.32");
+  grad.appendChild(stop2);
+  defs.appendChild(grad);
+  svg.appendChild(defs);
+
   const radarPolygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
   radarPolygon.setAttribute("points", radarPoints.map(p => p.join(",")).join(" "));
-  radarPolygon.setAttribute("fill", "#60a5fa");
-  radarPolygon.setAttribute("fill-opacity", "0.3");
-  radarPolygon.setAttribute("stroke", "#3b82f6");
+  radarPolygon.setAttribute("fill", `url(#${gradId})`);
+  radarPolygon.setAttribute("stroke", "#8e4585");
   radarPolygon.setAttribute("stroke-width", "3");
   svg.appendChild(radarPolygon);
 
@@ -152,23 +176,19 @@ function renderSkillsGraph(container, skillsData) {
     dot.setAttribute("cx", x);
     dot.setAttribute("cy", y);
     dot.setAttribute("r", "6");
-    dot.setAttribute("fill", "#1e40af");
-    dot.setAttribute("stroke", "#4c1d95");
-    dot.setAttribute("stroke-width", "2");
-    dot.setAttribute("data-value", skillPercentages[i]); // Add this line to store the percentage value
+    dot.setAttribute("fill", i % 2 === 0 ? "#8e4585" : "#800040"); // alternate plum/merlot
+    dot.setAttribute("stroke", "#fff");
+    dot.setAttribute("stroke-width", "2.5");
+    dot.setAttribute("data-value", skillPercentages[i]);
     dot.style.cursor = "pointer";
-    
-    // Add hover effects
     dot.addEventListener('mouseenter', () => {
       dot.setAttribute("r", "8");
-      dot.setAttribute("fill", "#2563EB");
+      dot.setAttribute("fill", "#b57fa6"); // light plum on hover
     });
-    
     dot.addEventListener('mouseleave', () => {
       dot.setAttribute("r", "6");
-      dot.setAttribute("fill", "#1e40af");
+      dot.setAttribute("fill", i % 2 === 0 ? "#8e4585" : "#800040");
     });
-    
     svg.appendChild(dot);
   });
 
@@ -217,36 +237,30 @@ function setupTooltip() {
   });
   document.body.appendChild(tooltip);
 
-  // Add event listeners to all data points
-  document.querySelectorAll('#skills-graph svg circle').forEach((dot, i) => {
+  // Add event listeners to all data points (only radar chart circles with data-value)
+  document.querySelectorAll('#skills-graph svg circle[data-value]').forEach((dot, i) => {
     dot.addEventListener('mousemove', (e) => {
       const skillName = document.querySelectorAll('#skills-graph svg text')[i].textContent;
-      const skillValue = e.target.getAttribute('data-value'); // Now this will get the correct value
-      
+      const skillValue = e.target.getAttribute('data-value');
       tooltip.innerHTML = `
         <div style="font-weight:600;font-size:16px;color:#60a5fa;">${skillName}</div>
         <div style="font-size:15px;color:#ffffff;">${skillValue}%</div>
       `;
-      
-          
       const tooltipRect = tooltip.getBoundingClientRect();
       const windowWidth = window.innerWidth;
       let left = e.pageX + 15;
       let top = e.pageY - 40;
-      
       if (left + tooltipRect.width > windowWidth - 20) {
         left = e.pageX - tooltipRect.width - 15;
       }
       if (top < 20) {
         top = e.pageY + 15;
       }
-      
       tooltip.style.left = `${left}px`;
       tooltip.style.top = `${top}px`;
       tooltip.style.opacity = 1;
       tooltip.style.transform = 'translateY(-5px) scale(1.02)';
     });
-
     dot.addEventListener('mouseout', () => {
       tooltip.style.opacity = 0;
       tooltip.style.transform = 'translateY(0px) scale(1)';

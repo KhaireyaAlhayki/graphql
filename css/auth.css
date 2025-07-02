@@ -9,6 +9,8 @@
   top: 0;
   left: 0;
   z-index: 0;
+  transform: scale(1.15);
+  transform-origin: top center;
 }
 
 .glass-card {
@@ -22,7 +24,7 @@
 }
 
 .login-container {
-  max-width: 17rem;
+  max-width: 20rem;
   margin: 2.3rem auto;
   padding: 1.3rem 1.3rem 1.1rem 1.3rem;
   background: rgba(255,255,255,0.20);
@@ -35,21 +37,21 @@
 }
 
 .login-logo {
-  width: 3.4rem;
-  height: 3.4rem;
-  margin: 0 auto 1rem;
-  background: linear-gradient(135deg, var(--burgundy-200) 0%, var(--burgundy-400) 100%);
-  border-radius: 0.85rem;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 10px rgba(139, 92, 246, 0.12);
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  margin-top: 1.2rem;
 }
 
 .login-logo img {
-  width: 1.8rem;
-  height: 1.8rem;
-  border-radius: 0.5rem;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .login-title {

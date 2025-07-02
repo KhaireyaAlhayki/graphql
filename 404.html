@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>404 Not Found</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="css/icon.png">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/general.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(120deg, #e9d0db 0%, #f6e3ea 100%);
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    }
+    .fancy-404 {
+      background: rgba(255,255,255,0.88);
+      border-radius: 2.2rem;
+      box-shadow: 0 8px 32px 0 rgba(162,58,77,0.18), 0 0 32px 8px #b57fa655;
+      padding: 3.2rem 2.7rem 2.7rem 2.7rem;
+      text-align: center;
+      max-width: 440px;
+      backdrop-filter: blur(14px);
+      animation: fadeIn 1.1s cubic-bezier(.4,0,.2,1), floatCard 4.5s ease-in-out infinite alternate;
+      position: relative;
+      overflow: hidden;
+    }
+    .fancy-404::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      border-radius: 2.5rem;
+      background: radial-gradient(circle at 70% 30%, #b57fa6 0%, transparent 70%);
+      opacity: 0.13;
+      z-index: 0;
+      pointer-events: none;
+      animation: glowPulse 3.5s infinite alternate;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px) scale(0.97);}
+      to { opacity: 1; transform: none;}
+    }
+    @keyframes glowPulse {
+      0% { opacity: 0.13; }
+      100% { opacity: 0.22; }
+    }
+    @keyframes floatCard {
+      0% { transform: translateY(0) scale(1); box-shadow: 0 8px 32px 0 rgba(162,58,77,0.18), 0 0 32px 8px #b57fa655; }
+      50% { transform: translateY(-12px) scale(1.012); box-shadow: 0 16px 48px 0 rgba(162,58,77,0.22), 0 0 40px 12px #b57fa655; }
+      100% { transform: translateY(0) scale(1); box-shadow: 0 8px 32px 0 rgba(162,58,77,0.18), 0 0 32px 8px #b57fa655; }
+    }
+    .fancy-404 h1 {
+      font-size: 5.2rem;
+      color: #8e4585;
+      margin-bottom: 0.5rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 12px #b57fa6aa;
+      z-index: 1;
+      position: relative;
+    }
+    .fancy-404 .emoji {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      display: block;
+      animation: bounce 1.8s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0);}
+      50% { transform: translateY(-10px);}
+    }
+    .fancy-404 p {
+      color: #800040;
+      font-size: 1.05rem;
+      margin-bottom: 2.1rem;
+      z-index: 1;
+      position: relative;
+      line-height: 1.6;
+    }
+    .fancy-404 a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.9rem 2.4rem;
+      background: linear-gradient(90deg, #b57fa6 0%, #8e4585 100%);
+      color: #fff;
+      border-radius: 1.3rem;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1.13rem;
+      box-shadow: 0 2px 8px rgba(142,69,133,0.13);
+      transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+      animation: pulseBtn 2.2s infinite;
+      z-index: 1;
+      position: relative;
+    }
+    .fancy-404 a:hover {
+      background: linear-gradient(90deg, #8e4585 0%, #b57fa6 100%);
+      box-shadow: 0 4px 16px rgba(142,69,133,0.18);
+      transform: translateY(-1px) scale(1.06);
+      animation: none;
+    }
+    @keyframes pulseBtn {
+      0%, 100% { box-shadow: 0 2px 8px rgba(142,69,133,0.13);}
+      50% { box-shadow: 0 6px 24px 0 #b57fa655;}
+    }
+  </style>
+</head>
+<body>
+  <div class="fancy-404">
+    <h1>404</h1>
+    <p>
+      Oops! The page you're looking for doesn't exist.<br>
+      Click below.. Let's get you back on track!!
+    </p>
+    <a href="/">Go Home</a>
+  </div>
+</body>
+</html> 

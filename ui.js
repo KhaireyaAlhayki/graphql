@@ -8,7 +8,7 @@ function showLoginForm() {
     <div class="fancy-login-bg">
       <div class="login-container glass-card">
         <div class="login-logo">
-          <img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="Logo" />
+          <img src="css/icon.png" alt="Logo" style="width: 72px; height: 72px; border-radius: 50%; margin-bottom: 1rem;" />
         </div>
         <h2 class="login-title">Sign in to Your Account</h2>
         <form id="login-form" autocomplete="on">
@@ -269,11 +269,18 @@ function showProfile(user) {
   });
 
   document.getElementById("app").innerHTML = `
-    <div class="profile-container">
-      <div class="profile-header">
-        <h2>Hello, ${username}!</h2>
-        <button class="logout-btn" id="logout-btn">Logout</button>
+    <button id="logout-btn" class="logout-btn floating-logout">Logout</button>
+    <div class="fancy-greeting-card">
+      <div class="greeting-halo"></div>
+      <div class="greeting-content">
+        <h2>
+          <span class="wave-emoji">👋</span>
+          Hello, <span class="username-gradient">${attrs.firstName}!</span>
+        </h2>
+        <div class="greeting-subtext">Welcome back! Your dashboard is ready for discovery</div>
       </div>
+    </div>
+    <div class="profile-container">
       <div class="profile-data">
         <div class="personal-info-card fancy-card">
           <h3><span>Personal Information</span></h3>

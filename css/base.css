@@ -37,10 +37,16 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: #c2a0af; /* darker maroonish background for the page */
+  background: linear-gradient(120deg, #e9d0db 0%, #f6e3ea 100%);
+  animation: bgMove 18s ease-in-out infinite alternate;
+  background-size: 200% 200%;
   color: var(--gray-900);
   line-height: 1.5;
-  
+}
+
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
 h1, h2, h3, h4 {
