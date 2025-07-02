@@ -4,7 +4,7 @@ import { login, initializeAuth, logout } from "./auth.js";
 
 
 async function handleLogin() {
-  const username = document.getElementById("username").value;
+  const username = document.getElementById("username").value.trim();
   const password = document.getElementById("password").value;
 
   showError("");
