@@ -4,7 +4,7 @@
   /* background: linear-gradient(135deg, var(--burgundy-400) 0%, var(--burgundy-100) 100%); */
   background: linear-gradient(120deg, #69384a 0%, #9c8b92 100%);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   position: fixed;
   top: 0;
@@ -26,7 +26,7 @@
 
 .login-container {
   max-width: 20rem;
-  margin: 3.5rem auto 0 auto;
+  margin: 0 auto;
   padding: 1.3rem 1.3rem 1.1rem 1.3rem;
   background: rgba(255,255,255,0.20);
   border-radius: 1.1rem;
@@ -45,7 +45,7 @@
   background: none;
   border-radius: 0;
   box-shadow: none;
-  margin-top: 0.5rem;
+  margin-top: 0;
 }
 
 .login-logo img {
@@ -127,4 +127,14 @@
   box-shadow: 0 1px 6px rgba(185, 106, 122, 0.10);
   border: 2px solid #b96a7a;
   display: none;
+}
+
+@media (max-width: 600px) {
+  .fancy-login-bg {
+    align-items: center !important;
+    min-height: 100vh !important;
+  }
+  .login-container {
+    margin: 0 auto !important;
+  }
 }
