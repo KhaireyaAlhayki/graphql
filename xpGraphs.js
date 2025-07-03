@@ -1,3 +1,5 @@
+import { formatNumberShort } from "./graphql.js";
+
 export function drawXPLineGraph(transactions, containerId) {
   const container = document.querySelector(containerId);
   if (!container || !transactions?.length) return;
@@ -124,7 +126,7 @@ export function drawXPLineGraph(transactions, containerId) {
     label.setAttribute("font-size", "14");
     label.setAttribute("font-weight", "700");
     label.setAttribute("fill", "#5C4033"); // dark brown
-    label.textContent = value >= 1000 ? `${value / 1000}k` : value;
+    label.textContent = formatNumberShort(value);
     svg.appendChild(label);
   }
 

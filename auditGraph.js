@@ -1,4 +1,4 @@
-// auditGraph.js
+import { formatNumberShort } from "./graphql.js";
 
 export function drawAuditGraph(data) {
   const container = document.querySelector("#audit-graph");
@@ -70,7 +70,7 @@ export function drawAuditGraph(data) {
     valueText.setAttribute("font-size", "17");
     valueText.setAttribute("fill", "#8B4513");
     valueText.setAttribute("font-weight", "600");
-    valueText.textContent = `${value.toLocaleString()} XP`;
+    valueText.textContent = `${formatNumberShort(value)}`;
     svg.appendChild(valueText);
   };
 

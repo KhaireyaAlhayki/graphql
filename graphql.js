@@ -210,4 +210,13 @@ export async function fetchAuditRatio(userId) {
   return (up / down).toFixed(1);
 }
 
+export function formatNumberShort(value) {
+  if (value >= 1e9) return (value / 1e9).toFixed(2).replace(/\.0$/, "") + "GB";
+  if (value >= 1e6) return (value / 1e6).toFixed(2).replace(/\.0$/, "") + "MB";
+  if (value >= 1e3) return (value / 1e3).toFixed(2).replace(/\.0$/, "") + "KB";
+  return value.toString() + "B";
+}
+
+
+
 
