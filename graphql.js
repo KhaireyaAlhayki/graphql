@@ -218,23 +218,26 @@ export async function fetchAuditRatio(userId) {
 // }
 
 export function formatNumberShort(value) {
+  let num, suffix;
+
   if (value >= 1e9) {
-    const truncated = Math.trunc((value / 1e9) * 100) / 100;
-    return truncated + "MB";
+    num = value / 1e9;
+    suffix = "GB";
+  } else if (value >= 1e6) {
+    num = value / 1e6;
+    suffix = "MB";
+  } else if (value >= 1e3) {
+    num = value / 1e3;
+    suffix = "KB";
+  } else {
+    return value.toString() + "B";
   }
-  if (value >= 1e6) {
-    const truncated = Math.trunc((value / 1e6) * 100) / 100;
-    return truncated + "MB";
-  }
-  if (value >= 1e3) {
-    const truncated = Math.trunc((value / 1e3) * 100) / 100;
-    return truncated + "KB";
-  }
-  return value.toString() + "B";
+
+  // Truncate to 2 decimals without rounding
+  const truncated = Math.trunc(num * 100) / 100;
+
+  // Convert to string, ensuring no trailing .0
+  const str = truncated.toString();
+
+  return str + suffix;
 }
-
-
-
-
-
-
