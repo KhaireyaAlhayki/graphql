@@ -26,6 +26,10 @@ export function drawAuditGraph(data) {
   }
 
   const { up, down } = data;
+  console.log("DEBUG: Raw audit data received:", data);
+  console.log("DEBUG: Audits Done (up):", up);
+  console.log("DEBUG: Audits Received (down):", down);
+
   const max = Math.max(up, down);
   const scaleX = val => (val / max) * (width - margin.left - margin.right);
 

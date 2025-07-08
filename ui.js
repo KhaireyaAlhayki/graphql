@@ -356,7 +356,7 @@ function showProfile(user) {
   drawXPLineGraph(user.recentTransactions, "#stats-graph");
   addSVGDownloadButtons('#stats-graph', '#stats-graph svg', 'cumulative-xp-graph');
 
-  fetchAuditStats()
+  fetchAuditStats(user.id)
     .then(data => {
       drawAuditGraph(data);
       addSVGDownloadButtons('#audit-graph', '#audit-graph svg', 'audit-points-graph');

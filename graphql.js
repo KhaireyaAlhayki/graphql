@@ -210,34 +210,13 @@ export async function fetchAuditRatio(userId) {
   return (up / down).toFixed(1);
 }
 
-// export function formatNumberShort(value) {
-//   if (value >= 1e9) return (value / 1e9).toFixed(2).replace(/\.0$/, "") + "GB";
-//   if (value >= 1e6) return (value / 1e6).toFixed(2).replace(/\.0$/, "") + "MB";
-//   if (value >= 1e3) return (value / 1e3).toFixed(2).replace(/\.0$/, "") + "KB";
-//   return value.toString() + "B";
-// }
-
 export function formatNumberShort(value) {
-  let num, suffix;
-
-  if (value >= 1e9) {
-    num = value / 1e9;
-    suffix = "GB";
-  } else if (value >= 1e6) {
-    num = value / 1e6;
-    suffix = "MB";
-  } else if (value >= 1e3) {
-    num = value / 1e3;
-    suffix = "KB";
-  } else {
-    return value.toString() + "B";
-  }
-
-  // Truncate to 2 decimals without rounding
-  const truncated = Math.trunc(num * 100) / 100;
-
-  // Convert to string, ensuring no trailing .0
-  const str = truncated.toString();
-
-  return str + suffix;
+  if (value >= 1e9) return (value / 1e9).toFixed(2).replace(/\.0$/, "") + "GB";
+  if (value >= 1e6) return (value / 1e6).toFixed(2).replace(/\.0$/, "") + "MB";
+  if (value >= 1e3) return (value / 1e3).toFixed(2).replace(/\.0$/, "") + "KB";
+  return value.toString() + "B";
 }
+
+
+
+
