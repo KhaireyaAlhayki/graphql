@@ -219,16 +219,20 @@ export async function fetchAuditRatio(userId) {
 
 export function formatNumberShort(value) {
   if (value >= 1e9) {
-    return (Math.floor((value / 1e9) * 100) / 100).toFixed(2).replace(/\.00$/, "") + "MB";
+    const truncated = Math.trunc((value / 1e9) * 100) / 100;
+    return truncated + "MB";
   }
   if (value >= 1e6) {
-    return (Math.floor((value / 1e6) * 100) / 100).toFixed(2).replace(/\.00$/, "") + "MB";
+    const truncated = Math.trunc((value / 1e6) * 100) / 100;
+    return truncated + "MB";
   }
   if (value >= 1e3) {
-    return (Math.floor((value / 1e3) * 100) / 100).toFixed(2).replace(/\.00$/, "") + "KB";
+    const truncated = Math.trunc((value / 1e3) * 100) / 100;
+    return truncated + "KB";
   }
   return value.toString() + "B";
 }
+
 
 
 
