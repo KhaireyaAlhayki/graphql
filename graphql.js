@@ -210,12 +210,26 @@ export async function fetchAuditRatio(userId) {
   return (up / down).toFixed(1);
 }
 
+// export function formatNumberShort(value) {
+//   if (value >= 1e9) return (value / 1e9).toFixed(2).replace(/\.0$/, "") + "GB";
+//   if (value >= 1e6) return (value / 1e6).toFixed(2).replace(/\.0$/, "") + "MB";
+//   if (value >= 1e3) return (value / 1e3).toFixed(2).replace(/\.0$/, "") + "KB";
+//   return value.toString() + "B";
+// }
+
 export function formatNumberShort(value) {
-  if (value >= 1e9) return (value / 1e9).toFixed(2).replace(/\.0$/, "") + "GB";
-  if (value >= 1e6) return (value / 1e6).toFixed(2).replace(/\.0$/, "") + "MB";
-  if (value >= 1e3) return (value / 1e3).toFixed(2).replace(/\.0$/, "") + "KB";
+  if (value >= 1e9) {
+    return (Math.floor((value / 1e9) * 100) / 100).toFixed(2).replace(/\.00$/, "") + "MB";
+  }
+  if (value >= 1e6) {
+    return (Math.floor((value / 1e6) * 100) / 100).toFixed(2).replace(/\.00$/, "") + "MB";
+  }
+  if (value >= 1e3) {
+    return (Math.floor((value / 1e3) * 100) / 100).toFixed(2).replace(/\.00$/, "") + "KB";
+  }
   return value.toString() + "B";
 }
+
 
 
 
